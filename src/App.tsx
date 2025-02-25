@@ -7,7 +7,9 @@ function App() {
     const [currentCharIndex, setCurrentCharIndex] = useState(-1); // 目前高亮的字索引
     const [chanting, setChanting] = useState(false); // 是否正在念誦
     const [finished, setFinished] = useState(false); // 是否完成念誦
+    const [speed, setSpeed] = useState(500); // 預設速度 500ms
 
+    const audio = new Audio("/chant.mp3"); // 載入音效
     const startChanting = () => {
         if (chanting) return;
         setChanting(true);
@@ -20,7 +22,8 @@ function App() {
 
         const interval = setInterval(() => {
             setCurrentCharIndex(charIndex);
-
+            audio.currentTime = 0; // 從頭播放音效
+            audio.play().catch((err) => console.error("音效播放錯誤:", err));
             if (charIndex === chant.length - 1) {
                 charIndex = 0;
                 totalCount++;
@@ -34,7 +37,7 @@ function App() {
                 setChanting(false);
                 setFinished(true);
             }
-        }, 500);
+        }, speed);
     };
 
     return (
@@ -54,6 +57,17 @@ function App() {
                         onChange={(e) => setTargetCount(parseInt(e.target.value))}
                         className="border p-2 w-full rounded mb-4"
                     />
+                    {/* 速度選擇 */}
+                    <select
+                        value={speed}
+                        onChange={(e) => setSpeed(parseInt(e.target.value))}
+                        className="border p-2 w-full rounded mb-4"
+                    >
+                        <option value={300}>快 (300ms)</option>
+                        <option value={500}>中 (500ms)</option>
+                        <option value={700}>慢 (700ms)</option>
+                    </select>
+                    {/* 開始按鈕 */}
                     <button
                         onClick={startChanting}
                         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
