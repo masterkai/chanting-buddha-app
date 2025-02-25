@@ -40,7 +40,7 @@ function App() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gray-100 p-4 m-auto">
             {!finished ? (
-                <div className="bg-white p-6 rounded-lg shadow-lg w-120 text-center m-auto max-w-full">
+                <div className="bg-white p-6 rounded-lg shadow-lg will-change-auto text-center m-auto max-w-full">
                     <h1 className="text-xl font-bold mb-4">念佛計數應用</h1>
                     <input
                         type="text"
