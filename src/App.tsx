@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import * as React from "react";
+import { executeFunctionsSequentially } from "../utils";
 
 const App: React.FC = () => {
     // 狀態管理
@@ -46,14 +47,19 @@ const App: React.FC = () => {
             }
 
             if (totalCount >= targetCount) {
-                stopChanting();
-                setFinished(true);
+                executeFunctionsSequentially([ async () => {
+                    stopChanting();
+                    await new Promise((resolve) => setTimeout(resolve, 2000));
+                }]).then(() =>{
+                    setFinished(true)
+                });
             }
         }, speed);
     };
 
     // 停止念誦
     const stopChanting = () => {
+        console.log('stopChanting');
         if (chantInterval.current) {
             clearInterval(chantInterval.current);
         }
@@ -66,7 +72,7 @@ const App: React.FC = () => {
         <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gray-100 p-4">
             {!finished ? (
                 <div className="bg-white p-6 rounded-lg shadow-lg text-center will-change-auto">
-                    <h1 className="text-xl font-bold mb-4">念佛計數應用</h1>
+                    <h1 className="text-xl font-bold mb-4">🙏卍念佛計數應用卍🧘</h1>
 
                     {/* 佛號輸入 */}
                     <input
