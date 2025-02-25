@@ -38,9 +38,9 @@ function App() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+        <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gray-100 p-4 m-auto">
             {!finished ? (
-                <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
+                <div className="bg-white p-6 rounded-lg shadow-lg w-120 text-center m-auto max-w-full">
                     <h1 className="text-xl font-bold mb-4">念佛計數應用</h1>
                     <input
                         type="text"
@@ -56,7 +56,7 @@ function App() {
                     />
                     <button
                         onClick={startChanting}
-                        className="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                         disabled={chanting}
                     >
                         {chanting ? "念誦中..." : "開始念誦"}
@@ -67,9 +67,13 @@ function App() {
                     <h1 className="text-2xl font-bold flex justify-center mt-4">
                         {chant.split("").map((char, index) => (
                             <span
-                                style={ index === currentCharIndex ? { backgroundColor: "yellow" } : {} }
+                                // style={ index === currentCharIndex ? { backgroundColor: "yellow" } : {} }
                                 key={index}
-                                className={`border px-2 py-1 mx-1`}
+                                className={`border px-2 py-1 mx-1 ${
+                                    index === currentCharIndex
+                                        ? "bg-yellow-300 text-black"
+                                        : "bg-black text-white"
+                                }`}
                             >
                 {char}
               </span>
