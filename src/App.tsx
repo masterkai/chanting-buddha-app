@@ -65,7 +65,7 @@ const App: React.FC = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gray-100 p-4">
             {!finished ? (
-                <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center will-change-auto">
+                <div className="bg-white p-6 rounded-lg shadow-lg text-center will-change-auto">
                     <h1 className="text-xl font-bold mb-4">念佛計數應用</h1>
 
                     {/* 佛號輸入 */}
@@ -121,7 +121,7 @@ const App: React.FC = () => {
                     </div>
 
                     {/* 佛號顯示 */}
-                    <div className="text-2xl font-bold flex justify-center mt-4">
+                    <div className="text-6xl font-bold flex justify-center mt-4">
                         {chant.split("").map((char, index) => (
                             <span
                                 key={index}
